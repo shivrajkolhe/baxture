@@ -1,0 +1,82 @@
+<div>
+    <h1>Form</h1>
+    <form [formGroup]="empForm" (ngSubmit)="onSubmitEmpData()">
+        <div class="form-group">
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" formControlName="fname" class="form-control" required
+                [ngClass]="{'is-invalid':isFormSubmit && f.fname.errors}">
+
+            <div *ngIf="isFormSubmit && f.fname.errors?.required" class="invalid-feedback">
+                first name is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fname">Last Name:</label>
+            <input type="text" name="lname" formControlName="lname" class="form-control" required
+                [ngClass]="{'is-invalid':isFormSubmit && f.lname.errors}">
+
+            <div *ngIf="isFormSubmit && f.lname.errors?.required" class="invalid-feedback">
+                last name is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Enter Email</label>
+            <input type="email" class="form-control" formControlName="email" required
+                [ngClass]="{'is-invalid':isFormSubmit && f.email.errors}">
+
+            <div *ngIf="isFormSubmit && f.email.errors?.required" class="invalid-feedback">
+                email is Required
+            </div>
+
+            <div *ngIf="isFormSubmit && f.email.errors?.pattern" class="invalid-feedback">
+                Please Enter the Valid Email
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="fname">Phone Number:</label>
+            <input type="number" name="phone" formControlName="phone" class="form-control" required
+                [ngClass]="{'is-invalid':isFormSubmit && f.phone.errors}">
+
+            <div *ngIf="isFormSubmit && f.phone.errors?.required" class="invalid-feedback">
+                Phone Number is required
+            </div>
+
+            <div *ngIf="isFormSubmit && f.phone.errors?.pattern" class="invalid-feedback">
+                Please Enter 10 digit number
+            </div>
+        </div>
+
+        <br>
+        
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <br>
+    <hr>
+    <h1>Table Data</h1>
+    <br>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        <tr *ngFor="let dt of data">
+            <td>{{dt.id}}</td>
+            <td>{{dt.fname}}</td>
+            <td>{{dt.lname}}</td>
+            <td>{{dt.email}}</td>
+            <td>{{dt.phone}}</td>
+            <td></td>
+        </tr>
+    </table>
+
+</div>
