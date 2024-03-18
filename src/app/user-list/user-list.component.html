@@ -14,7 +14,67 @@
         <td>{{dt.lname}}</td>
         <td>{{dt.email}}</td>
         <td>{{dt.phone}}</td>
-        <td><button class="btn btn-danger">Delete</button></td>
-        <td><button class="btn btn-success">Update</button></td>
+        <td><button class="btn btn-danger" (click)="onDelete(dt)">Delete</button></td>
+        <td><button class="btn btn-success" (click)="onDataSelect(dt)">Update</button></td>
     </tr>
 </table>
+
+
+<form [formGroup]="empForm1" (ngSubmit)="onSubmitEmpData1()">
+    <div class="form-group">
+        <label for="fname">First Name:</label>
+        <input type="text" name="fname" formControlName="fname" class="form-control" required
+            [ngClass]="{'is-invalid':isFormSubmit1 && f1.fname.errors}"  [(ngModel)]="empForm1.fname">
+
+        <div *ngIf="isFormSubmit1 && f1.fname.errors?.required" class="invalid-feedback">
+            first name is required
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lname">Last Name:</label>
+        <input type="text" name="lname" formControlName="lname" class="form-control" required
+            [ngClass]="{'is-invalid':isFormSubmit1 && f1.lname.errors}" [(ngModel)]="empForm1.lname">
+
+        <div *ngIf="isFormSubmit1 && f1.lname.errors?.required" class="invalid-feedback">
+            last name is required
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Enter Email</label>
+        <input type="email" class="form-control" formControlName="email" required
+            [ngClass]="{'is-invalid':isFormSubmit1 && f1.email.errors}" [(ngModel)]="empForm1.email">
+
+        <div *ngIf="isFormSubmit1 && f1.email.errors?.required" class="invalid-feedback">
+            email is Required
+        </div>
+
+        <div *ngIf="isFormSubmit1 && f1.email.errors?.pattern" class="invalid-feedback">
+            Please Enter the Valid Email
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="number" name="phone" formControlName="phone" class="form-control" required
+            [ngClass]="{'is-invalid':isFormSubmit1 && f1.phone.errors}" [(ngModel)]="empForm1.phone">
+
+        <div *ngIf="isFormSubmit1 && f1.phone.errors?.required" class="invalid-feedback">
+            Phone Number is required
+        </div>
+
+        <div *ngIf="isFormSubmit1 && f1.phone.errors?.pattern" class="invalid-feedback">
+            Please Enter 10 digit number
+        </div>
+    </div>
+
+    <br>
+    
+    <div>
+        <button type="submit" class="btn btn-primary" >Submit</button>
+        
+        <!-- <button type="button" class="btn btn-info">Update</button> -->
+    </div>
+</form>
